@@ -4,6 +4,12 @@
   <Content type="html">
      <![CDATA[ 
 
+<style>
+textarea {
+  border: 1px solid #ccc;
+  width: 100%;
+}
+</style>
 <script>
 function sendSginedFetch() {
   var url = document.getElementById('apiUrl').value + '?nocache=' + new Date().getTime();
@@ -14,13 +20,14 @@ function sendSginedFetch() {
   var start = new Date();
   gadgets.io.makeRequest(url, function(response) {
     var e = document.createElement('textarea');
+    e.rows = 3;
     e.value = url + '\n' + (new Date() - start) + 'ms' + '\n' + (response.data || response.errors[0]);
     document.body.appendChild(e);
     gadgets.window.adjustHeight();
   }, params);
 };
 </script>
-<input id="apiUrl" type="text" value="URL to where oauth-signed-fetch-test.js runs"> 
+<input id="apiUrl" type="text" value="<URL to where oauth-signed-fetch-test.js runs>" size="40"> 
 <button onclick="sendSginedFetch()">Send a Sgined Fetch</button> 
 <div id="log"></div> 
 
