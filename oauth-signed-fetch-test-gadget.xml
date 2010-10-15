@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="Signed Fetch Test" /> 
+  <Content type="html">
+     <![CDATA[ 
+
+<script>
+function sendSginedFetch() {
+  var url = document.getElementById('apiUrl').value + '?nocache=' + new Date().getTime();
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+  params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.SIGNED;
+  params.OAUTH_ADD_EMAIL = 'true';
+  var start = new Date();
+  gadgets.io.makeRequest(url, function(response) {
+    var e = document.createElement('textarea');
+    e.value = url + '\n' + (new Date() - start) + 'ms' + '\n' + (response.data || response.errors[0]);
+    document.body.appendChild(e);
+    gadgets.window.adjustHeight();
+  }, params);
+};
+</script>
+<input id="apiUrl" type="text" value="URL to where oauth-signed-fetch-test.js runs"> 
+<button onclick="sendSginedFetch()">Send a Sgined Fetch</button> 
+<div id="log"></div> 
+
+     ]]>
+  </Content> 
+</Module>
