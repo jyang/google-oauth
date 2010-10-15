@@ -1,0 +1,7 @@
+= Client Side =
+
+Making a 2-legged OAuth to a Google Data API
+
+= Server Side =
+
+Verifying a signed fetch from Google
