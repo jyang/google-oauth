@@ -23,11 +23,18 @@ function sendSginedFetch() {
   gadgets.io.makeRequest(url, function(response) {
     var e = document.createElement('textarea');
     e.rows = 3;
-    e.value = url + '\n' + (new Date() - start) + 'ms' + '\n' +
-        (response.errors ? response.errors[0] + ':' + response.text : response.data);
+    e.value = url + '\n' + (new Date() - start) + 'ms\n' + getResponseContent(response);
     document.body.appendChild(e);
     gadgets.window.adjustHeight();
   }, params);
+};
+
+function getResponseContent(response) {
+  if (response.errors && response.errors.length > 0) {
+    return response.errors[0] + ': ' + response.text;
+  } else {
+    return response.data;
+  }
 };
 
 gadgets.util.registerOnLoadHandler(function() {
