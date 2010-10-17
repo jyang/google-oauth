@@ -21,7 +21,8 @@ function sendSginedFetch() {
   gadgets.io.makeRequest(url, function(response) {
     var e = document.createElement('textarea');
     e.rows = 3;
-    e.value = url + '\n' + (new Date() - start) + 'ms' + '\n' + (response.data || response.errors[0]);
+    e.value = url + '\n' + (new Date() - start) + 'ms' + '\n' +
+        (response.errors ? response.errors[0] + ':' + response.text : response.data);
     document.body.appendChild(e);
     gadgets.window.adjustHeight();
   }, params);
