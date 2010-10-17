@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?> 
 <Module>
   <ModulePrefs title="Signed Fetch Test" /> 
+  <UserPref name="apiUrl" display_name="URL to where oauth-signed-fetch-test.js runs"
+      datatype="string" default_value="http://host:port/path"/>
   <Content type="html">
      <![CDATA[ 
 
@@ -27,8 +29,12 @@ function sendSginedFetch() {
     gadgets.window.adjustHeight();
   }, params);
 };
+
+gadgets.util.registerOnLoadHandler(function() {
+  document.getElementById('apiUrl').value = new gadgets.Prefs().getString("apiUrl");
+});
 </script>
-<input id="apiUrl" type="text" value="<URL to where oauth-signed-fetch-test.js runs>" size="40"> 
+<input id="apiUrl" type="text" value="" size="40"> 
 <button onclick="sendSginedFetch()">Send a Sgined Fetch</button> 
 <div id="log"></div> 
 
